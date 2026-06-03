@@ -29,10 +29,17 @@ Modifications to existing codebases require mapping deployed contract state, exi
 
 ## Usage
 
-Say any of these to Claude Code:
+Start with your protocol idea:
 
 ```
-initialize protocol       — start a new protocol from scratch
+/defi-spec-driven A yield vault that accepts USDC and deploys into Aave, with a fee on harvest
+```
+
+The skill picks up from there — it asks the right questions, runs all six spec phases, sets up the Foundry project, and implements function by function.
+
+You can also jump to a specific phase if the project is already in progress:
+
+```
 protocol research         — Phase 1
 economic spec             — Phase 2
 architecture spec         — Phase 3
