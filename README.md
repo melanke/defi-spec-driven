@@ -27,6 +27,14 @@ Modifications to existing codebases require mapping deployed contract state, exi
 - Foundry installed (`forge`, `cast`)
 - GitHub CLI (`gh`) authenticated — used to create the project repo from `melanke/foundry-security-template`
 
+## Installation
+
+```bash
+git clone git@github.com:melanke/defi-spec-driven.git ~/.claude/skills/defi-spec-driven
+```
+
+Restart Claude Code. The skill loads automatically from `~/.claude/skills/`.
+
 ## Usage
 
 Start with your protocol idea:
