@@ -25,8 +25,7 @@ Modifications to existing codebases require mapping deployed contract state, exi
 ## Requirements
 
 - Foundry installed (`forge`, `cast`)
-- GitHub CLI (`gh`) for repo creation from template
-- A `melanke/foundry-security-template` clone (or GitHub access to create from it)
+- GitHub CLI (`gh`) authenticated — used to create the project repo from `melanke/foundry-security-template`
 
 ## Usage
 
