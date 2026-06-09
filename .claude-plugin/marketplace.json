@@ -11,6 +11,16 @@
   },
   "plugins": [
     {
+      "name": "defi-protocol-discovery",
+      "version": "1.0.0",
+      "description": "DeFi protocol opportunity discovery and viability assessment — from raw idea to go/no-go decision, using lean canvas, analogue analysis, economic stress-testing, and assumption mapping.",
+      "author": {
+        "name": "Gil Lopes Bueno",
+        "url": "https://github.com/melanke"
+      },
+      "source": "./plugins/defi-protocol-discovery"
+    },
+    {
       "name": "defi-spec-driven",
       "version": "1.0.0",
       "description": "Six-phase DeFi protocol specification before any Solidity, then per-function implementation tracked against the spec.",

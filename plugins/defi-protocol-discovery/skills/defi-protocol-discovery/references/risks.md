@@ -1,0 +1,157 @@
+# Phase 5 — Risk & Assumptions
+
+## Goal
+
+Make every assumption from Phases 1–4 explicit, rank them by risk, map the scenarios that could kill the protocol, and produce a validation plan for the most dangerous assumptions.
+
+This phase does not produce new ideas. It produces clarity about what we don't know, and what we need to know before committing to build.
+
+---
+
+## Step 1 — Assumption extraction
+
+Every decision made in Phases 1–4 rested on assumptions. Extract them all. Pull from:
+
+- `PROBLEM.md`: assumptions about the problem being real and the segment caring
+- `LANDSCAPE.md`: assumptions about competitive dynamics and early adopter behavior
+- `CANVAS.md`: assumptions about the UVP, mechanism, channels, revenue
+- `ECONOMICS.md`: assumptions about TVL growth, fee sustainability, bootstrap stickiness
+
+Also pull from STATE.md: any OQs that were converted to ACCEPTED-AMBIGUITY carry implicit assumptions that belong here.
+
+For each assumption, assign:
+- `ASM-{domain}-{claim}` slug
+- **Risk level**: LOW / MEDIUM / HIGH / CRITICAL
+- **Basis**: what evidence or reasoning supports this assumption being true?
+- **Invalidation condition**: what would have to be true for this assumption to be wrong?
+
+Risk assessment formula:
+- **Impact if wrong**: low (annoying) / medium (requires pivot) / high (protocol doesn't work) / critical (protocol fails or gets drained)
+- **Probability of being wrong**: low (well-evidenced) / medium (educated guess) / high (thin evidence) / unknown
+
+Risk level = max(impact, probability) with weight toward impact.
+
+---
+
+## Step 2 — Death spiral mapping
+
+A death spiral is a self-reinforcing failure sequence specific to the protocol's design. Map 2–4 plausible death spirals.
+
+For each death spiral:
+- `RISK-{trigger}-{consequence}` slug
+- Trigger condition: what initiates the spiral
+- Mechanism: what self-reinforces (why it doesn't stop on its own)
+- Terminal state: what the protocol looks like at the end of the spiral
+- Current mitigation: what in the design prevents or limits this (if anything)
+- Residual risk: if mitigations exist, how much risk remains?
+
+**Common DeFi death spirals to check against your specific design:**
+
+| Spiral type | Trigger | Self-reinforcing mechanism |
+|---|---|---|
+| Bank run | Large withdrawal event | Liquidity thins → slippage rises → more withdrawals |
+| Depeg | Peg loses confidence | Redemptions drain collateral → collateral drops → more redemptions |
+| Liquidation cascade | Price drop exceeds collateral buffer | Forced sales depress price → more positions undercollateralized |
+| Oracle manipulation | Low liquidity oracle feed | Price manipulated → protocol drained before correction |
+| Incentive collapse | Emissions end or token price falls | LPs leave → TVL drops below useful threshold → more LPs leave |
+| Governance attack | Token concentration | Hostile governance vote → protocol drained or parameters changed adversarially |
+| Circular collateral | Protocol's own token used as collateral | Token price falls → collateral value falls → liquidations depress token further |
+
+Not all spirals are fatal. Some have natural floors (liquidations stop when collateral ratio improves). Document the natural floor if one exists.
+
+---
+
+## Step 3 — Regulatory and dependency risk
+
+**Regulatory surface**: does this protocol touch any of the following?
+- Stablecoins (especially algorithmic or yield-bearing) — high regulatory scrutiny
+- KYC/AML requirements — particularly for protocols targeting institutional users
+- Securities-adjacent instruments (yield products that may be classified as securities)
+- US user access — if the protocol is accessible from the US, OFAC and FinCEN apply
+
+Flag the regulatory surface explicitly. This is not a legal opinion — it's a signal to get one before launch.
+
+**External dependencies**: the protocol's assumptions include assumptions about the systems it depends on:
+- Oracle providers (uptime, manipulation resistance, feed availability)
+- External protocols (Aave, Uniswap, Chainlink — their contract risk becomes your contract risk)
+- Bridges (if cross-chain — bridge failures are one of DeFi's most common catastrophic risks)
+- Governance of dependencies (a protocol that owns your liquidity can change rules)
+
+For each critical dependency, log an `ASM-*` entry covering its reliability assumption.
+
+---
+
+## Step 4 — Validation plan
+
+For the top 3–5 highest-risk assumptions: identify the cheapest experiment that would confirm or refute them before significant engineering investment.
+
+Validation approaches in DeFi:
+- **On-chain data query**: if the assumption is about existing user behavior, the answer may already be in on-chain data (Dune, Flipside, DefiLlama)
+- **User interviews**: if the assumption is about willingness to use a protocol, 5–10 conversations with the target segment can validate or invalidate
+- **Competitor analysis**: if a competitor exists, their TVL/volume/retention data is indirect validation
+- **Simulation**: if the assumption is about mechanism behavior, a simulation or mathematical model can stress-test it before code
+- **Governance proposal**: if the early adopter is a DAO/treasury, a governance proposal for a pilot integration is a real validation
+
+For each validation:
+- What's the experiment?
+- What result would confirm the assumption?
+- What result would refute it?
+- Cost and time estimate?
+
+---
+
+## RISKS.md Template
+
+```markdown
+# Risk & Assumptions
+
+## Assumption Register
+| Slug | Assumption | Risk level | Basis | Invalidation condition |
+|---|---|---|---|---|
+| ASM-lp-demand | LPs will move from Uniswap V3 for better IL protection | HIGH | Anecdotal; no quantified demand | Survey of top LPs shows <10% would switch |
+| ASM-fee-sufficient | 0.05% fee generates enough revenue at target TVL | MEDIUM | Unit economics calc in ECONOMICS.md | Competitor fee compression below 0.03% |
+| ... | | | | |
+
+## Death Spirals
+### RISK-[trigger]-[consequence]
+**Trigger**: [condition]
+**Mechanism**: [self-reinforcing loop]
+**Terminal state**: [end state]
+**Mitigation**: [what's in the design to prevent/limit this]
+**Residual risk**: [LOW / MEDIUM / HIGH]
+
+### RISK-...
+...
+
+## Regulatory Surface
+[Checklist of regulatory exposure areas, if any]
+[Note: get legal opinion before launch if any boxes are checked]
+
+## External Dependencies
+| Dependency | What we assume | Failure mode | Mitigation |
+|---|---|---|---|
+| [Oracle: Chainlink] | [99.9% uptime, manipulation resistant] | [stale price → bad liquidations] | [circuit breaker, backup oracle] |
+| ... | | | |
+
+## Validation Plan
+| Assumption | Experiment | Confirms if | Refutes if | Cost | Timeline |
+|---|---|---|---|---|---|
+| ASM-lp-demand | Interview 10 top Uniswap V3 LPs | >6/10 cite IL as primary pain | <3/10 would switch for IL solution | ~20h | 2 weeks |
+| ... | | | | | |
+
+## Overall Risk Assessment
+[One paragraph: the 2–3 highest-risk assumptions and what the validation plan should prioritize before committing to build]
+```
+
+---
+
+## Advancing to Phase 6
+
+Gate check:
+
+1. Are all major assumptions from Phases 1–4 extracted and slugged? If state.md has ACCEPTED-AMBIGUITY entries, are they reflected here?
+2. Are 2–4 death spirals mapped? If only one exists, that's allowed — but justify it.
+3. Is a validation plan defined for the top 3 highest-risk assumptions?
+4. Are all OQs from this phase resolved or converted to ACCEPTED-AMBIGUITY?
+
+When satisfied: *"Risk & Assumptions closed. Moving to Phase 6 — Go/No-Go, where we synthesize and decide."*

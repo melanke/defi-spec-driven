@@ -1,0 +1,168 @@
+# Phase 4 — Economic Viability
+
+## Goal
+
+Stress-test the economic model. By the end of this phase, the developer should be able to answer: is this protocol financially viable at realistic TVL, and is the yield sustainable?
+
+The most common failure mode in DeFi is not a hack — it's an economic model that works in a bull market and collapses when incentives dry up. This phase finds that before it's built.
+
+---
+
+## Step 1 — Sustainable yield audit
+
+The first question, before any projections: *"Where does the yield come from, exactly?"*
+
+Classify every yield source in the protocol:
+
+| Yield source | Type | Sustainable? |
+|---|---|---|
+| Trading fees | Real (paid by users) | Yes |
+| Interest spread | Real (paid by borrowers) | Yes |
+| Token emissions | Inflationary | Only if emissions decrease over time to a real-yield floor |
+| Treasury subsidies | Finite | No — define the runway |
+| External protocol yield (e.g., Aave, Compound) | Dependent | Yes, but carries dependency risk |
+| MEV/arbitrage profits | Real but variable | Partially — can't be projected reliably |
+
+For each inflationary or finite source: what happens to user behavior when it ends? If the answer is "they leave", the protocol has a bootstrapping strategy but not a sustainability plan.
+
+**Required output**: a yield sustainability statement — one paragraph that honestly characterizes whether the protocol has real yield, inflationary yield, or a transition plan from one to the other.
+
+---
+
+## Step 2 — Revenue model
+
+For each revenue stream identified in the canvas:
+
+1. **Fee structure**: what's the exact fee? (e.g., 0.3% of volume, 10% performance fee on yield, $X/year for a subscription tier)
+2. **Who bears it**: LP, trader, depositor, borrower — and is this fee competitive with alternatives?
+3. **Protocol capture**: what percentage goes to the protocol vs LPs vs token holders?
+4. **Volume/TVL dependency**: at what TVL or volume does this fee generate meaningful revenue?
+
+Calculate breakeven: *"At what TVL/volume does protocol fee revenue cover protocol operating costs (oracles, keepers, audits)?"* This is the minimum viable scale.
+
+---
+
+## Step 3 — TVL scenario analysis
+
+Build three TVL scenarios: bear, base, and bull. For each scenario, project:
+
+- TVL at 6 months, 12 months, 24 months
+- Volume (if applicable) as a multiple of TVL
+- Protocol revenue (from revenue model above)
+- Protocol costs
+- Net position (revenue minus costs)
+
+**Bear case**: TVL stagnates at bootstrapping floor. Incentives run out. What's the protocol's state?
+**Base case**: TVL grows to the target segment's realistic capture (use on-chain data from Phase 2 comps).
+**Bull case**: TVL grows to best-case based on analogues in Phase 2.
+
+Anchor all projections in real data where possible. Competitor TVL from Phase 2 is the calibration point.
+
+The scenario analysis is not a forecast — it's a stress test. The question is: does the protocol survive the bear case? If not, what kills it, and is that kill condition avoidable?
+
+---
+
+## Step 4 — Unit economics
+
+Calculate protocol revenue per $1M of TVL (or per $1M of volume, depending on the model).
+
+This single number is the most useful economic benchmark in DeFi. It allows:
+- Direct comparison to competitors (who are they more efficient than?)
+- Minimum scale calculation (TVL needed to be self-sustaining)
+- Sensitivity analysis (what happens if fee rates compress by 50%?)
+
+For the current protocol:
+- Revenue per $1M TVL at current fee structure: `$X`
+- Revenue per $1M TVL at compressed fees (50% lower): `$Y`
+- Breakeven TVL at current fees: `$Z`
+- Breakeven TVL at compressed fees: `$W`
+
+---
+
+## Step 5 — Liquidity bootstrapping cost
+
+From the canvas, the bootstrapping mechanism was identified. Now price it.
+
+For each bootstrapping mechanism, estimate:
+- Total cost to reach minimum viable TVL
+- Duration of incentive spend
+- Expected decay in TVL when incentives end (based on analogues)
+- Residual "sticky" TVL after decay
+
+If the sticky TVL after decay is above the breakeven point from Step 2: the bootstrapping strategy is viable.
+If the sticky TVL after decay is below breakeven: the protocol enters a death spiral — costs exceed revenue, requiring more incentives, which the treasury can't sustain. Log this as `RISK-incentive-collapse-liquidity` in Phase 5.
+
+---
+
+## Step 6 — Token role (if applicable)
+
+If the protocol has or plans a governance token, answer explicitly:
+
+1. **What does the token do?** (governance only / fee sharing / staking / veTokenomics / other)
+2. **Does the token create protocol value or extract it?** (a token that receives all fees extracts value from LPs; a token that boosts yields for stakers without revenue backing inflates without creating)
+3. **Emission schedule**: total supply, unlock schedule, initial distribution. What's the dilution rate in year 1?
+4. **Circular dependency check**: does the protocol's economic model depend on its own token price? (If yes, this is a red flag — log as `ASM-token-price-stable` in Phase 5)
+
+If no token: note whether a token is planned and when, or confirm it's intentionally tokenless. A tokenless protocol must have a different sustainability model — document it.
+
+---
+
+## ECONOMICS.md Template
+
+```markdown
+# Economic Viability
+
+## Sustainable Yield Audit
+| Yield source | Type | Sustainable? | Notes |
+|---|---|---|---|
+
+**Yield sustainability statement**: [one honest paragraph]
+
+## Revenue Model
+| Stream | Fee structure | Protocol capture | Breakeven TVL/volume |
+|---|---|---|---|
+
+## TVL Scenarios
+| Scenario | 6mo TVL | 12mo TVL | 24mo TVL | Revenue | Costs | Net |
+|---|---|---|---|---|---|---|
+| Bear | | | | | | |
+| Base | | | | | | |
+| Bull | | | | | | |
+
+**Bear case survival**: [does the protocol survive? what kills it if not?]
+
+## Unit Economics
+- Revenue per $1M TVL (current fees): $[X]
+- Revenue per $1M TVL (fees compressed 50%): $[Y]
+- Breakeven TVL (current): $[Z]
+- Breakeven TVL (compressed): $[W]
+
+## Bootstrapping Cost
+- Mechanism: [from canvas]
+- Total cost to min viable TVL: $[X]
+- Duration: [weeks/months]
+- Expected sticky TVL post-decay: $[Y]
+- Viable: [yes / no / conditional on...]
+
+## Token Role (if applicable)
+- Function: [governance / fee sharing / staking / other]
+- Value creation vs extraction: [assessment]
+- Circular dependency: [yes / no — if yes, flagged as ASM-*]
+- Emission schedule summary: [total supply, year 1 dilution %]
+
+## Open Questions
+[Economic uncertainties logged as OQs from this phase]
+```
+
+---
+
+## Advancing to Phase 5
+
+Gate check:
+
+1. Is every yield source classified as real, inflationary, or finite — and is there a sustainability path? If not, stay.
+2. Does the protocol survive the bear scenario? If not, stay until the kill condition is addressed or explicitly accepted.
+3. Is the bootstrapping cost realistic against available resources? If not, stay.
+4. Is any circular token dependency identified and logged? If yes, ensure it's queued for Phase 5.
+
+When satisfied: *"Economic viability closed. Moving to Phase 5 — Risk & Assumptions, where we rank what we've assumed and map what could kill the protocol."*
