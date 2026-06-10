@@ -62,6 +62,18 @@ OPEN → (unresolvable) → ACCEPTED-AMBIGUITY [assumption made, risk level: low
 
 No OQ survives Phase 6 as silently OPEN. Every one must be CLOSED or ACCEPTED-AMBIGUITY before the go/no-go verdict is written.
 
+### OQ and Expansion Queue overlap
+
+Some items are simultaneously a question that can't be answered yet AND one that could invalidate a future phase decision. Both roles can coexist.
+
+Rule: if an item can't be resolved now but would block a future phase:
+1. Log it as an OQ with its blocking phase — e.g., `[OQ-3]: Can the mechanism work at <$1M TVL? | Blocking phase: 3`
+2. Also add it to the Expansion Queue so it surfaces for active resolution, not only at the gate
+
+If the item can invalidate the *current* decision: address it immediately (Interaction Principle #7 — exception to queuing). If it can only invalidate a *future* decision: dual-log and continue.
+
+The Expansion Queue is not a parking lot for items that carry real blocking power. The OQ entry is the anchor; the queue entry is the reminder to work through it before the relevant phase begins.
+
 ### Decision format
 
 Decisions are facts — not aspirations. If the answer is "we don't know yet", that's an OQ, not a decision.

@@ -29,6 +29,24 @@ For each inflationary or finite source: what happens to user behavior when it en
 
 ---
 
+## Step 1.5 — Primary revenue variable diagnostic
+
+Before modeling scenarios, identify the variable that most directly drives protocol revenue.
+
+| Type | Revenue driver | Scenario axis |
+|---|---|---|
+| **TVL-driven** | fee rate × TVL (deposit fee, management fee) | Model bear/base/bull on TVL axis |
+| **Volume-driven** | fee rate × volume (swap fee, liquidation fee) | Model bear/base/bull on volume axis; volume ≠ TVL |
+| **Rate-driven** | spread × TVL, where spread moves with market rates (lending spread, fixed-rate protocol) | Model bear/base/bull on rate axis, not TVL axis |
+
+Most protocols have a mix, but one variable dominates. Identify it before building the Step 3 scenarios — it determines which axis matters.
+
+**Rate-driven protocols require explicit attention**: in a bear market, rates compress faster and harder than TVL drops. A protocol with $50M TVL at 8% spread generates the same revenue as one with $100M TVL at 4% spread — and bear markets typically compress both simultaneously. Modeling only TVL scenarios for a rate-driven protocol produces a misleadingly comfortable bear case.
+
+Diagnostic: calculate revenue at three rate levels (current rate, 50% compressed, near-zero) at constant TVL. If the difference across rate scenarios exceeds the difference across TVL scenarios, the protocol is rate-driven and Step 3 must vary rates independently.
+
+---
+
 ## Step 2 — Revenue model
 
 For each revenue stream identified in the canvas:

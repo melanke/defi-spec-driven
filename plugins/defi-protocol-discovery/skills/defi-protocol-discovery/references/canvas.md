@@ -107,10 +107,41 @@ For most protocols, liquidity begets liquidity — the protocol is useless below
 
 Map: what's the minimum viable TVL for the protocol to be useful? What's the bootstrapping mechanism (emissions, POL, partnerships, grants, seed LPs)? What's the total cost? What's the timeline?
 
+**Required calculation — break-even TVL:**
+
+```
+Break-even TVL = annual operating costs ÷ annual revenue per $1M TVL
+```
+
+If break-even TVL is above the target segment's realistic addressable pool, that is a viability flag — not a note to bury in Phase 4. Surface it here, while the canvas is open. If the number can't be calculated yet (revenue model is incomplete), that means the bootstrapping field can't be honestly filled — log it as an OQ blocking Phase 4.
+
+If seed TVL is below break-even, document the capital bridge explicitly: how long does the team fund the deficit, and what's the mechanism that closes the gap (grant, investor, token raise, organic growth)?
+
 ### 11. Exit / Sustainability Plan
 *What does this protocol look like in 3 years if it succeeds?*
 
 One short paragraph. Forces clarity on: does this need a token? Is it a public good or a revenue-generating protocol? What does "winning" mean in this space?
+
+---
+
+## Bifurcated v1/v2 pattern
+
+Some protocol mechanisms depend on ecosystem preconditions that don't yet exist at full adoption — Uniswap V4 hooks at meaningful liquidity depth, EigenLayer restaking at scale, account abstraction wallet penetration above a useful threshold. When the Phase 1 mechanism sketch included such a precondition, the canvas cannot be filled as a single product.
+
+Apply the v1/v2 split explicitly when this applies:
+
+**v1 (works today)**: what can the protocol deliver using the existing ecosystem? This version must be independently useful — not a stripped-down placeholder. If v1 has no standalone value proposition, the bootstrapping strategy depends entirely on the precondition arriving on schedule. That is a bet, not a plan.
+
+**v2 (unlocks the differentiating mechanism)**: when the precondition is met, what does the protocol become? The v2 UVP is the full vision; v1 is what earns the user base and liquidity that v2 inherits.
+
+Fill the UVP, Unique Mechanism, and Revenue Streams canvas fields twice — once for v1, once for v2. If they come out identical, the precondition isn't actually load-bearing and the split isn't needed.
+
+**Required questions when applying this pattern**:
+1. *Does v1 generate enough value to bootstrap liquidity independently of v2's mechanism?* If no, surface the precondition timeline as a viability question, not a background assumption.
+2. *What's the realistic adoption timeline for the precondition?* If this can't be estimated from on-chain data or protocol roadmaps, log as an OQ.
+3. *Is the v1 → v2 transition a migration the user will make, or will they need to be re-acquired?* If re-acquisition is required, v1 TVL does not transfer — model v1 and v2 as separate bootstrapping events and price each separately.
+
+If the protocol has no precondition dependency, skip this section entirely.
 
 ---
 

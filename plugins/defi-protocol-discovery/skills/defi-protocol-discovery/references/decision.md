@@ -41,14 +41,17 @@ For each WEAK score: is it a blocker, or a known risk to carry forward?
 
 ## Step 3 — Kill criteria check
 
-Apply the kill criteria from Step 1 to the synthesis results. For each criterion:
+Apply the kill criteria from Step 1 to the synthesis results. Each criterion has one of three states:
 
-- Is it met (kill condition triggered)? → NO-GO
-- Is it not met (kill condition not triggered)? → Continue
+- **NOT TRIGGERED**: evidence shows the kill condition is not met → this criterion passes
+- **TRIGGERED**: evidence shows the kill condition is met → NO-GO; stop here
+- **INDETERMINATE**: the validation experiment has not been run; the criterion cannot be evaluated yet
 
-If any kill criterion is triggered: the verdict is NO-GO. Document the specific criterion and the evidence that triggered it. A NO-GO is not a failure — it's the skill working correctly.
+If any criterion is TRIGGERED: verdict is NO-GO. Document the specific criterion and the evidence. A NO-GO is not a failure — it's the skill working correctly.
 
-If no kill criterion is triggered: proceed to Step 4.
+If no criterion is TRIGGERED but one or more are INDETERMINATE: do not treat INDETERMINATE as passing. Proceed to Step 4, but each INDETERMINATE criterion becomes a blocking validation condition in the CONDITIONAL GO verdict — not an optional caveat.
+
+If all criteria are NOT TRIGGERED: proceed to Step 4 and expect a GO or CONDITIONAL GO depending on Step 4 results.
 
 ---
 
@@ -70,7 +73,12 @@ One of three outcomes:
 
 **GO**: The protocol concept is viable enough to commit to specification. All kill criteria pass. High-risk assumptions are either validated or explicitly accepted.
 
-**CONDITIONAL GO**: The protocol concept is viable but one or more CRITICAL assumptions remain unvalidated. Proceed with validation experiments before starting spec. Define the validation deadline and what triggers a return to this phase.
+**CONDITIONAL GO**: The protocol concept is viable but conditions must be met before starting spec. Conditions come from two sources: INDETERMINATE kill criteria (Step 3) and VALIDATE FIRST assumptions (Step 4). Type each condition explicitly:
+
+- **Absolute blocker**: if this condition fails → NO-GO regardless of other results. List these first. Evaluate them in sequence — if one fails, stop; don't evaluate the rest.
+- **Stage blocker**: if this condition fails → return to the relevant phase and revise before proceeding to spec or build. These are serious but not existential.
+
+The Protocol Brief for a CONDITIONAL GO is withheld or produced with explicit `[TBD pending: condition N]` placeholders for fields that depend on unvalidated assumptions. Do not project unvalidated numbers into the handoff document — the spec team should know what's real and what's assumed.
 
 **NO-GO**: One or more kill criteria triggered. Document the specific reason. Optionally: identify what would have to change for a future re-evaluation (different market conditions, different mechanism, different segment).
 
@@ -140,10 +148,10 @@ Example: "A fixed-rate lending protocol for protocol treasuries on Ethereum main
 | Phase 5 — Risks | RISKS.md | STRONG / ADEQUATE / WEAK | [note] |
 
 ## Kill Criteria Check
-| Criterion | Triggered? | Evidence |
+| Criterion | State | Evidence |
 |---|---|---|
-| [criterion 1] | NO | [evidence] |
-| [criterion 2] | NO | [evidence] |
+| [criterion 1] | NOT TRIGGERED / TRIGGERED / INDETERMINATE | [evidence or "validation not run"] |
+| [criterion 2] | NOT TRIGGERED / TRIGGERED / INDETERMINATE | [evidence or "validation not run"] |
 
 ## Unvalidated High-Risk Assumptions
 | Slug | Decision | Rationale |

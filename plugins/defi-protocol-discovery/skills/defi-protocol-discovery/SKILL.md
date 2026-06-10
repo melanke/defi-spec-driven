@@ -190,7 +190,7 @@ In Phase 6, establish kill criteria BEFORE synthesizing the go/no-go. Ask: *"Wha
 
 ### 10. Autonomous checkpoint
 
-When advancing between phases without a developer message in between, perform an explicit checkpoint before loading the next phase reference:
+At every phase boundary — regardless of whether there was a developer message between phases — perform an explicit checkpoint before loading the next phase reference:
 
 ```
 CHECKPOINT — Phase N complete

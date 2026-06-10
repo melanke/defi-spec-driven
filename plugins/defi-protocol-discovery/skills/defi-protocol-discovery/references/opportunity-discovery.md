@@ -126,10 +126,26 @@ Reason for selection: [one sentence]
 
 ---
 
-## Advancing to Phase 1
+## Presenting the Shortlist
 
-Present the shortlist to the developer. Ask them to select one concept — or to say what's missing if none of the candidates feel right (which triggers another iteration within Phase 0).
+Present the shortlist and give a recommendation — don't leave selection as an open menu:
 
-After selection, confirm: *"[OPP-N] selected. Moving to Phase 1 — Idea Sharpening, where we'll challenge the problem hypothesis and find the real problem beneath it."*
+*"My recommendation is [OPP-N]: the weak point ([weak point text]) is the most addressable of the batch, and the problem is the most specific. If [OPP-M] resonates more strongly with you, tell me why — that's useful signal about the direction you want to go."*
 
-If the developer came from Profile B or C, remind them that Phase 1 will treat the selected hypothesis as a starting point to challenge, not a conclusion to document.
+Give a recommendation even when the choice is close. The developer can override; what matters is that the reasoning is visible.
+
+**If the developer asks for more detail on a candidate before selecting:**
+Expand that candidate's problem, mechanism, and weak point in 2–3 focused paragraphs. Do not enter JTBD or 5 Whys — those are Phase 1. If they ask "but how would the mechanism work exactly?", redirect: *"The mechanism detail is Phase 1's job — we need to confirm the problem is worth solving before designing the solution. Right now the question is whether this problem is worth exploring."*
+
+---
+
+## Gate Before Advancing to Phase 1
+
+Before loading the Phase 1 reference, confirm all four:
+
+1. The selected concept has a named problem, a named segment, and at least one mechanism hypothesis. If not: iterate within Phase 0.
+2. The concept's primary weak point has been articulated and the developer has acknowledged it as a hypothesis to challenge in Phase 1. If the developer hasn't acknowledged the weakness, surface it explicitly before advancing.
+3. All eliminated candidates are documented with a one-sentence reason in OPPORTUNITIES.md. If not: complete the file.
+4. The developer understands Phase 1 will treat the selected hypothesis as a target to challenge, not a conclusion to document. State this explicitly before advancing: *"[OPP-N] selected. In Phase 1 we'll treat this as a hypothesis to challenge — the goal is to find the real problem beneath it, which may look different from what we've written here."*
+
+When all four are satisfied, load the Phase 1 reference and begin.

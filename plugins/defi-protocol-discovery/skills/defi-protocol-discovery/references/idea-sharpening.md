@@ -22,6 +22,8 @@ If the developer describes a mechanism ("I want to build a vault that auto-rebal
 
 This step is complete when the developer can state the problem independently of the solution. If they can't, stay here.
 
+**Mechanism feasibility check**: once the problem is extracted, flag whether the mechanism described is confirmed (existing infrastructure, proven approach) or a hypothesis (depends on immature infrastructure, unproven primitive, or a novel combination with no clear precedent). If it's a hypothesis, log it as `OQ-N blocking Phase 3` — the canvas field "Unique Mechanism" will require confirming this. A mechanism that has never been examined for technical feasibility should not enter the canvas as if it were settled.
+
 ---
 
 ## Step 2 — Jobs-to-be-Done

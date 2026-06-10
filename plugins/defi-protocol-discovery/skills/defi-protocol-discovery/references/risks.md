@@ -65,11 +65,12 @@ Not all spirals are fatal. Some have natural floors (liquidations stop when coll
 
 **Regulatory surface**: does this protocol touch any of the following?
 - Stablecoins (especially algorithmic or yield-bearing) — high regulatory scrutiny
+- **Third-party discretionary allocation**: if any team member, curator, or strategist makes decisions about where depositor funds are allocated — even partially — this may qualify as investment adviser activity under the US Investment Advisers Act 1940 or equivalent. Applies to: yield vaults with human-curated strategies, managed accounts, any protocol where team discretion determines user yield beyond pure smart contract automation. If checked: legal consultation is required before launch, not after.
 - KYC/AML requirements — particularly for protocols targeting institutional users
 - Securities-adjacent instruments (yield products that may be classified as securities)
 - US user access — if the protocol is accessible from the US, OFAC and FinCEN apply
 
-Flag the regulatory surface explicitly. This is not a legal opinion — it's a signal to get one before launch.
+Flag the regulatory surface explicitly. This is not a legal opinion — it's a signal to get one before launch. If the discretionary allocation box is checked, prioritize that legal consultation above all other validation experiments — it's cheap ($5–15k), fast (4 weeks), and the failure mode is existential.
 
 **External dependencies**: the protocol's assumptions include assumptions about the systems it depends on:
 - Oracle providers (uptime, manipulation resistance, feed availability)
@@ -89,7 +90,8 @@ Validation approaches in DeFi:
 - **On-chain data query**: if the assumption is about existing user behavior, the answer may already be in on-chain data (Dune, Flipside, DefiLlama)
 - **User interviews**: if the assumption is about willingness to use a protocol, 5–10 conversations with the target segment can validate or invalidate
 - **Competitor analysis**: if a competitor exists, their TVL/volume/retention data is indirect validation
-- **Simulation**: if the assumption is about mechanism behavior, a simulation or mathematical model can stress-test it before code
+- **Simulation / backtesting**: if the assumption is about mechanism behavior or historical performance, a simulation or backtest can stress-test it before code
+- **Legal consultation**: for regulatory and compliance assumptions, a legal opinion from DeFi-specialized counsel is the only valid validation. On-chain data and user interviews cannot validate legal risk. Get the opinion before committing to build, not after.
 - **Governance proposal**: if the early adopter is a DAO/treasury, a governance proposal for a pilot integration is a real validation
 
 For each validation:
