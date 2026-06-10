@@ -107,7 +107,7 @@ For most protocols, liquidity begets liquidity — the protocol is useless below
 
 Map: what's the minimum viable TVL for the protocol to be useful? What's the bootstrapping mechanism (emissions, POL, partnerships, grants, seed LPs)? What's the total cost? What's the timeline?
 
-**Required calculation — break-even TVL:**
+**Break-even TVL (attempt now; log as OQ blocking Phase 4 if inputs are not yet confirmed):**
 
 ```
 Break-even TVL = annual operating costs ÷ annual revenue per $1M TVL
@@ -139,7 +139,7 @@ Fill the UVP, Unique Mechanism, and Revenue Streams canvas fields twice — once
 **Required questions when applying this pattern**:
 1. *Does v1 generate enough value to bootstrap liquidity independently of v2's mechanism?* If no, surface the precondition timeline as a viability question, not a background assumption.
 2. *What's the realistic adoption timeline for the precondition?* If this can't be estimated from on-chain data or protocol roadmaps, log as an OQ.
-3. *Is the v1 → v2 transition a migration the user will make, or will they need to be re-acquired?* If re-acquisition is required, v1 TVL does not transfer — model v1 and v2 as separate bootstrapping events and price each separately.
+3. *Is the v1 → v2 transition a migration the user will make, or will they need to be re-acquired?* If re-acquisition is required, v1 TVL does not transfer — model v1 and v2 as separate bootstrapping events and price each separately. When re-acquisition is confirmed, the Liquidity Bootstrapping canvas field must contain estimates for both v1 and v2 as separate events. A v2 estimate can be order-of-magnitude at this stage — what matters is that it is present. A canvas showing only v1 bootstrapping when re-acquisition is confirmed produces a systematically underestimated capital requirement, and the Phase 3 gate cannot confirm a credible bootstrapping strategy.
 
 If the protocol has no precondition dependency, skip this section entirely.
 

@@ -72,6 +72,12 @@ Not all spirals are fatal. Some have natural floors (liquidations stop when coll
 
 Flag the regulatory surface explicitly. This is not a legal opinion — it's a signal to get one before launch. If the discretionary allocation box is checked, prioritize that legal consultation above all other validation experiments — it's cheap ($5–15k), fast (4 weeks), and the failure mode is existential.
 
+When logging this in the assumption register, use slug `ASM-regulatory-investment-adviser` at risk level CRITICAL. Without a slug, this flag will not carry forward to the Phase 6 kill criteria table.
+
+The legal consultation should answer specifically: *"Can this protocol operate as described without registering as an investment adviser under the Investment Advisers Act 1940 (or local equivalent), and if yes, under which exemption?"* A non-answer from counsel does not constitute validation.
+
+Note: if registration is required and not acceptable, a real alternative is redesigning the allocation mechanism to be fully algorithmic — removing human discretion entirely. This is a significant product architecture decision with UX tradeoffs, but it is an option that should be evaluated before defaulting to "abandon the concept."
+
 **External dependencies**: the protocol's assumptions include assumptions about the systems it depends on:
 - Oracle providers (uptime, manipulation resistance, feed availability)
 - External protocols (Aave, Uniswap, Chainlink — their contract risk becomes your contract risk)

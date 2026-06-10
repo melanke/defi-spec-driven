@@ -70,6 +70,8 @@ Build three TVL scenarios: bear, base, and bull. For each scenario, project:
 - Protocol costs
 - Net position (revenue minus costs)
 
+**If Step 1.5 identified this as rate-driven**: restructure the scenario axis. Instead of three TVL scenarios, run a 2×3 matrix: two TVL levels (bootstrapping floor and target TVL) × three rate scenarios (current rate, 50% compressed, near-zero). The bear case for a rate-driven protocol must compress both rate and TVL simultaneously — a bear case where only TVL drops while rates hold constant produces a misleadingly comfortable result.
+
 **Bear case**: TVL stagnates at bootstrapping floor. Incentives run out. What's the protocol's state?
 **Base case**: TVL grows to the target segment's realistic capture (use on-chain data from Phase 2 comps).
 **Bull case**: TVL grows to best-case based on analogues in Phase 2.

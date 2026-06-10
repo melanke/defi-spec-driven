@@ -22,7 +22,12 @@ If the developer describes a mechanism ("I want to build a vault that auto-rebal
 
 This step is complete when the developer can state the problem independently of the solution. If they can't, stay here.
 
-**Mechanism feasibility check**: once the problem is extracted, flag whether the mechanism described is confirmed (existing infrastructure, proven approach) or a hypothesis (depends on immature infrastructure, unproven primitive, or a novel combination with no clear precedent). If it's a hypothesis, log it as `OQ-N blocking Phase 3` — the canvas field "Unique Mechanism" will require confirming this. A mechanism that has never been examined for technical feasibility should not enter the canvas as if it were settled.
+**Mechanism feasibility check**: once the problem is extracted, flag whether the mechanism described is confirmed (existing infrastructure, proven approach) or a hypothesis. Two distinct types require different logging:
+
+- **Technical hypothesis**: depends on unproven primitives, novel combinations without clear precedent, or infrastructure that exists but hasn't been used this way before. Log as `OQ-N blocking Phase 3`.
+- **Market precondition hypothesis**: the mechanism works technically but depends on an ecosystem condition that doesn't yet exist at sufficient adoption scale (e.g., V4 hooks require meaningful V4 TVL depth, intent-based architecture requires wallet penetration above a useful threshold). Log as `OQ-N blocking Phase 3` AND note in STATE.md: *"Phase 3 should apply the bifurcated v1/v2 pattern — mechanism depends on ecosystem precondition."* A market precondition is a viability-level concern, not just a technical flag — surface it with that weight.
+
+A mechanism that has never been examined for feasibility should not enter the canvas as if it were settled.
 
 ---
 
@@ -30,7 +35,7 @@ This step is complete when the developer can state the problem independently of 
 
 Apply JTBD framing to sharpen the problem statement. A "job" is the progress a user is trying to make in a specific situation — not a feature they want.
 
-Ask three JTBD questions:
+Ask these three JTBD questions **one at a time** — wait for the developer's answer before moving to the next. The answer to Q1 shapes how Q2 is framed; the answer to Q2 shapes Q3. Batching all three in one message sacrifices the signal that makes JTBD useful.
 
 1. *"When does someone decide they need to solve this problem? What triggers that moment?"*
    — This reveals the situation. A problem without a concrete trigger situation is often too abstract.
@@ -129,4 +134,6 @@ Gate check before advancing:
 3. Is the root cause identified (via 5 Whys)? If not, stay.
 4. Are all blocking OQs from this phase resolved? If not, resolve or convert to ACCEPTED-AMBIGUITY.
 
-When all four are satisfied: *"Problem statement closed. Moving to Phase 2 — Landscape & Analogues, where we map who's tried this before and what we can learn from them."*
+5. If a mechanism was described: was the mechanism feasibility check run? If flagged as a hypothesis (technical or market precondition), is there an OQ logged blocking Phase 3? If a market precondition hypothesis, does STATE.md note that Phase 3 should apply the bifurcated v1/v2 pattern?
+
+When all five are satisfied: *"Problem statement closed. Moving to Phase 2 — Landscape & Analogues, where we map who's tried this before and what we can learn from them."*

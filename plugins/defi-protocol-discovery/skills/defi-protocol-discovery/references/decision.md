@@ -14,6 +14,8 @@ Before looking at the accumulated work, establish the conditions under which the
 
 Ask the developer: *"Before we review everything — what would have to be true for you to decide not to build this? Think about the biggest risks we've identified."*
 
+Before asking the developer to generate criteria, review RISKS.md and pre-populate any CRITICAL-rated assumptions as candidate kill criteria. Present these as starting points: *"Based on Phase 5, here are suggested kill criteria — confirm each or adjust."* This ensures high-risk assumptions don't slip past the kill criteria step because the developer didn't think to name them.
+
 Confirm 3–5 kill criteria. Document them in DECISION.md before proceeding to synthesis. Examples:
 
 - "If the validation plan for ASM-lp-demand shows <30% of LPs cite IL as their primary pain"
@@ -78,6 +80,8 @@ One of three outcomes:
 - **Absolute blocker**: if this condition fails → NO-GO regardless of other results. List these first. Evaluate them in sequence — if one fails, stop; don't evaluate the rest.
 - **Stage blocker**: if this condition fails → return to the relevant phase and revise before proceeding to spec or build. These are serious but not existential.
 
+Classification rule: a condition is an **absolute blocker** if failure means the protocol cannot legally exist, cannot operate without exposing the team to criminal or civil liability, or requires a fundamental redesign of the core mechanism. A condition is a **stage blocker** if failure means a specific phase's assumptions need revision while the protocol category and general approach remain viable.
+
 The Protocol Brief for a CONDITIONAL GO is withheld or produced with explicit `[TBD pending: condition N]` placeholders for fields that depend on unvalidated assumptions. Do not project unvalidated numbers into the handoff document — the spec team should know what's real and what's assumed.
 
 **NO-GO**: One or more kill criteria triggered. Document the specific reason. Optionally: identify what would have to change for a future re-evaluation (different market conditions, different mechanism, different segment).
@@ -102,6 +106,10 @@ Target network: [or TBD if not yet decided]
 ## Target Segment
 Primary: [from CANVAS.md]
 Early adopters: [specific — from LANDSCAPE.md]
+
+## Regulatory Status
+[CLEAR / REQUIRES CONSULTATION / TBD pending: legal opinion on (specific question)]
+[One sentence on regulatory surface and required action before launch, if any]
 
 ## Core Value Proposition
 [From CANVAS.md UVP field — one sentence]

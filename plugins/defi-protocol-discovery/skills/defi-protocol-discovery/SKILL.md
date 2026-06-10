@@ -180,6 +180,8 @@ Before producing a full file: one sentence stating what it will capture and any 
 
 When a sub-question isn't a prerequisite for the current item, register in STATE.md `Expansion Queue` and redirect. Exception: if the sub-question is an objection that could invalidate the current decision, address it immediately. Criterion: *"can the answer change what we're about to close?"* If yes, follow. If no, queue.
 
+For items that contain both a current-phase dimension (in scope for the active phase) and a future-phase dimension (out of scope): address the current-phase dimension immediately, then apply the dual-logging rule from state-management.md for the future-phase dimension — log as both an OQ with its blocking phase AND as an Expansion Queue entry. Don't defer both; don't address both immediately. Split them.
+
 ### 8. Challenge mode — don't just document
 
 This skill's job is not to turn the developer's idea into a polished document. It is to find the weakest points in the idea before they become expensive. In every phase, identify the most dangerous assumption and surface it explicitly. A discovery process that never pushes back is not a discovery process — it's a writing exercise.
